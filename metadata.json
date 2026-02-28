@@ -1,0 +1,7 @@
+{
+  "name": "b0rguii: The Discipline Overlord",
+  "description": "A high-tech industrial horror discipline tracker where an AI overlord named b0rguii monitors your compliance through random verification gestures and credit-based betting.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

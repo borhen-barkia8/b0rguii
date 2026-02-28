@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-mono: "Space Mono", monospace;
+  --color-background: #050505;
+  --color-foreground: #e0ffff;
+  --color-primary: #00ffff;
+  --color-accent: #ff003c;
+  --color-secondary: #003333;
+}
+
+[data-theme="red"] {
+  --color-primary: #ff003c;
+  --color-secondary: #330000;
+  --color-foreground: #ffe0e0;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary selection:text-black;
+    font-family: var(--font-mono);
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+    background-size: 100% 2px, 2px 100%;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  
+  .crt-vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(0,0,0,0) 70%, rgba(0,0,0,0.4) 100%);
+    z-index: 9998;
+    pointer-events: none;
+  }
+
+  .glow-text {
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.2);
+  }
+
+  .glitch-text {
+    position: relative;
+    display: inline-block;
+  }
+
+  .btn-cyber {
+    @apply relative border-2 border-primary bg-background text-primary px-6 py-3 font-bold uppercase tracking-wider overflow-hidden transition-all duration-200;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+    box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.2), 0 0 10px rgba(0, 255, 255, 0.2);
+  }
+
+  .btn-cyber:hover:not(:disabled) {
+    @apply bg-primary text-black;
+    box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.5);
+  }
+
+  .panel-cyber {
+    @apply bg-black/80 border border-primary/30 p-6 shadow-[0_0_15px_rgba(0,255,255,0.05)];
+    position: relative;
+  }
+  
+  .scanline {
+    width: 100%;
+    height: 100px;
+    z-index: 10000;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
+    opacity: 0.1;
+    position: absolute;
+    bottom: 100%;
+    animation: scanline 10s linear infinite;
+  }
+}
+
+@keyframes scanline {
+  0% { bottom: 100%; }
+  80% { bottom: 100%; }
+  100% { bottom: -100px; }
+}
+
+@keyframes jitter {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(1px, -1px); }
+  50% { transform: translate(-1px, 1px); }
+  75% { transform: translate(-1px, -1px); }
+  100% { transform: translate(1px, 1px); }
+}
